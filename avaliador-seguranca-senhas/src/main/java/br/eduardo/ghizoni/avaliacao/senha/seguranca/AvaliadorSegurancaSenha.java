@@ -1,30 +1,110 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraLowerCase;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraMiddleNumberOrSymbol;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraNumbers;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraPorCharacter;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraSymbols;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraUpperCase;
+
 public class AvaliadorSegurancaSenha {
 
-	private static final int _4 = 4;
+	private static final int MULTIPLICADOR_REQUERIMENTOS = 2;
+	private static final int MULTIPLICADOR_LENGTH = 4;
 	private Integer pontuacao = 0;
+	private List<RegraPorCharacter> regrasPorCharacter = new ArrayList<RegraPorCharacter>();
+	private List<RegraPorCharacter> requerimentos = new ArrayList<RegraPorCharacter>();
+	private String senha = "";
 	
-	public void calculaSegurancaDaSenha(String senha){
-		
-		numberOfCharacters(senha); //+(n*4)
-//		uppercaseLetters(senha);	//+((len-n)*2)
-//		lowercaseLetters(senha); //+((len-n)*2)	
-//		numbers(senha); //+(n*4)	
-//		symbols(senha); //+(n*6)	
-//		middleNumbersOrSymbols(senha); //+(n*2)	
-//		requirements(senha); //+(n*2)
-		
+	public AvaliadorSegurancaSenha() {
 	}
-
-	protected AvaliadorSegurancaSenha numberOfCharacters(String senha) {
-		pontuacao = senha.length() * _4;
-		return this;
+	
+	public AvaliadorSegurancaSenha(String senha, Class ... regras ) {
+		this.senha = senha;
+		inicializaRegras(regras);
 	}
-
+	
 	public int getPontuacao() {
-		// TODO Auto-generated method stub
 		return pontuacao;
 	}
 	
+	private void inicializaRegras(Class ... regras) {
+		List<Class> requerimentosObrigatorios = requerimentosObrigatorios();
+		for (Class<RegraPorCharacter> classe : regras) {
+			RegraPorCharacter regra;
+			try {
+				regra = classe.newInstance();
+				regra.setSenha(senha);
+				regrasPorCharacter.add(regra);
+				
+				if (requerimentosObrigatorios.contains(classe))
+					requerimentos.add(regra);
+				
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	private List<Class> requerimentosObrigatorios(){
+		ArrayList<Class> requerimentosObrigatorios = new ArrayList<Class>();
+		requerimentosObrigatorios.add(RegraLowerCase.class);
+		requerimentosObrigatorios.add(RegraUpperCase.class);
+		requerimentosObrigatorios.add(RegraNumbers.class);
+		requerimentosObrigatorios.add(RegraSymbols.class);
+		
+		return requerimentosObrigatorios;
+		
+	}
+	
+	public void calculaSegurancaDaSenha(String senha) {
+		this.senha = senha;
+		inicializaRegras(
+				RegraLowerCase.class, 
+				RegraUpperCase.class, 
+				RegraNumbers.class, 
+				RegraSymbols.class, 
+				RegraMiddleNumberOrSymbol.class);
+		calculaSegurancaDaSenha();
+	}
+	
+	
+	public void calculaSegurancaDaSenha() {
+
+		pontuacao += pontuacaoNumberOfCharacters(); // +(n*4)
+
+		for (int index = 0; index < senha.length();  index++)
+			for (RegraPorCharacter regraPorCharacter : regrasPorCharacter) 
+				regraPorCharacter.validaCharacter(index);
+		
+		for (RegraPorCharacter regraPorCharacter : regrasPorCharacter) 
+			pontuacao += regraPorCharacter.score();
+		
+		pontuacao += pontuacaoRequirements();
+	}
+
+	private int pontuacaoRequirements() {
+		int count = 0;
+		if (pontuacaoNumberOfCharacters() > 0)
+			count++;
+			
+		for (RegraPorCharacter regra: requerimentos) 
+			if (regra.score() > 0)
+				count++;
+		
+		return count >3 ? count * MULTIPLICADOR_REQUERIMENTOS : 0;
+	}
+
+
+	private int pontuacaoNumberOfCharacters() {
+		return senha.length() * MULTIPLICADOR_LENGTH;
+	}
+
+
 }

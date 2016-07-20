@@ -8,7 +8,6 @@ public class RegraMiddleNumberOrSymbol extends RegraPorCharacter {
 			pontuacao++;
 	}
 
-	@Override
 	public int score() {
 		return pontuacao * 2;
 	}

@@ -8,7 +8,6 @@ public class RegraNumbers extends RegraPorCharacter {
 			pontuacao++;
 	}
 
-	@Override
 	public int score() {
 		return pontuacao * 4;
 	}

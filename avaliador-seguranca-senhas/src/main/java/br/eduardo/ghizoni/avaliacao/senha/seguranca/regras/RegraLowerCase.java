@@ -8,7 +8,6 @@ public class RegraLowerCase extends RegraPorCharacter {
 			pontuacao++;
 	}
 
-	@Override
 	public int score() {
 		if (pontuacao > 0)
 			return (senha.length() - pontuacao) * 2;

@@ -1,16 +1,20 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public abstract class RegraPorCharacter implements Regra {
+public abstract class RegraPorString implements Regra {
 	protected Integer pontuacao = 0;
 	protected String senha;
 	
-	public RegraPorCharacter() {
+	public RegraPorString() {
 	}
 	
-	public abstract void validaCharacter(int index);
+	public abstract void validaSenha();
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public int score() {
+		return pontuacao;
 	}
 	
 }

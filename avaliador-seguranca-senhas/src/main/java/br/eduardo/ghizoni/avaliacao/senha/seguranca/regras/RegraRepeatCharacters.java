@@ -6,17 +6,17 @@ public class RegraRepeatCharacters extends RegraPorCharacter {
 	
 	@Override
 	public void validaCharacter(int index) {
-		Character letra = Character.toUpperCase(senha.charAt(index));
+		Character letra = senha.charAt(index);
 		boolean possuiCharRepetido = false;
 		for (int i = 0; i < senha.length(); i++) 
-			if (letra.equals(Character.toUpperCase(senha.charAt(i))) && i != index){
+			if (letra.equals(senha.charAt(i)) && i != index){
 				possuiCharRepetido = true;
 				pontuacao += Math.abs(senha.length() / (i-index));
 			}
 
 		if (possuiCharRepetido) { 
 			charRepetidos++; 
-			Integer charUnicos = (int) (senha.length()-charRepetidos);
+			Double charUnicos = (Double) (senha.length()-charRepetidos);
 			Double i =  ((pontuacao * 1.0)/charUnicos);
 			pontuacao = (int) (charUnicos > 0 ? Math.ceil(i) : Math.ceil(pontuacao)); 
 		}
@@ -24,7 +24,6 @@ public class RegraRepeatCharacters extends RegraPorCharacter {
 		
 	}
 
-	@Override
 	public int score() {
 		if (charRepetidos > 0)
 			return  pontuacao * -1;

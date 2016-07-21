@@ -4,7 +4,7 @@ public class NumerosEmSequencia extends RegraSequencia {
 
 	@Override
 	protected String getSequence() {
-		return "0123456789";
+		return "01234567890";
 	}
 
 }

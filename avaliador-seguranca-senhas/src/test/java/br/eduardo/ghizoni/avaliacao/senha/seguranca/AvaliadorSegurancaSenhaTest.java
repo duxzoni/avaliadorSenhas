@@ -366,4 +366,15 @@ public class AvaliadorSegurancaSenhaTest {
 		Assert.assertSame("Score", 20, resultadoAvaliacao.getPontuacao());
 		Assert.assertEquals("Complexidade", "Fraca", resultadoAvaliacao.getComplexidade());
 	}
+	
+	@Test
+	public void senhaComSimbolosENumerosEmSequencia() {
+		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
+		avaliadorSegurancaSenha.calculaSegurancaDaSenha("!@#$%67890");
+		Response resultadoAvaliacao = avaliadorSegurancaSenha.getResultadoAvaliacao();
+		Assert.assertSame("Score", 83, resultadoAvaliacao.getPontuacao());
+		Assert.assertEquals("Complexidade", "Muito forte", resultadoAvaliacao.getComplexidade());
+	}
+	
+	
 }

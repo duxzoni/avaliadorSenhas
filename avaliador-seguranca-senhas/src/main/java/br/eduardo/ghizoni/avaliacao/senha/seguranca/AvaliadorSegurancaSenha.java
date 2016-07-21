@@ -1,7 +1,9 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.Regra;
 import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraConsecutiveLowerCase;
@@ -35,7 +37,7 @@ public class AvaliadorSegurancaSenha {
 	public AvaliadorSegurancaSenha() {
 	}
 	
-	public int getPontuacao() {
+	public Integer getPontuacao() {
 		return pontuacao > 100 ? 100: pontuacao;
 	}
 	
@@ -140,6 +142,18 @@ public class AvaliadorSegurancaSenha {
 		
 		return count >3 ? count * MULTIPLICADOR_REQUERIMENTOS : 0;
 	}
+
+	private String getComplexidade() {
+		return Complexidade.porPontuacao(getPontuacao()).getMensagem();
+	}
+
+	public Response getResultadoAvaliacao() {
+		Response retorno = new Response();
+		retorno.setPontuacao(getPontuacao());
+		retorno.setComplexidade(getComplexidade());
+		return retorno;
+	}
+
 
 
 }

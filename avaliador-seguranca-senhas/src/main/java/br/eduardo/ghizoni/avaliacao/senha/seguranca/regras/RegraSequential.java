@@ -1,7 +1,5 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-import java.awt.datatransfer.StringSelection;
-
 public abstract class RegraSequential extends RegraPorString{
 
 	@Override

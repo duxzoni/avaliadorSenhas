@@ -9,6 +9,8 @@ public class RegraNumbers extends RegraPorCharacter {
 	}
 
 	public int score() {
+		if(pontuacao == senha.length())
+			return 0;
 		return pontuacao * 4;
 	}
 

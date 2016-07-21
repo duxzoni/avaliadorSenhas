@@ -9,7 +9,7 @@ public class RegraUpperCase extends RegraPorCharacter {
 	}
 
 	public int score() {
-		if (pontuacao > 0)
+		if (pontuacao > 0 && pontuacao < senha.length())
 			return (senha.length() - pontuacao) * 2;
 		return 0;
 	}

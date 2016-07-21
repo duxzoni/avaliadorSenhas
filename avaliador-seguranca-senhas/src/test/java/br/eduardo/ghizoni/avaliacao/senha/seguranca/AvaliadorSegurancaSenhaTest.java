@@ -1,5 +1,7 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca;
 
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,7 +27,7 @@ public class AvaliadorSegurancaSenhaTest {
 	public void scoreSemSenha() {
 		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha("");
-		Assert.assertEquals("Score", 0, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -34,7 +36,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("12345678", RegraNumberOfCharacters.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 32, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 32, avaliadorSegurancaSenha.getPontuacao());
 	}
 		
 	@Test
@@ -43,7 +45,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("12345678", RegraUpperCase.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 0, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -52,7 +54,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123456aa", RegraUpperCase.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 0, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -61,7 +63,16 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123456AA", RegraUpperCase.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 12, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 12, avaliadorSegurancaSenha.getPontuacao());
+	}
+	
+	@Test
+	public void upperCaseScoreJustLetters() {
+		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
+		avaliadorSegurancaSenha.inicializa("ABCDEFGH", RegraUpperCase.class);
+		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
+		
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
 	}
 
 	@Test
@@ -70,7 +81,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("12345678", RegraLowerCase.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 0, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -80,7 +91,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
 		
-		Assert.assertEquals("Score", 12, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 12, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -89,7 +100,16 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123456AA", RegraLowerCase.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 0, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
+	}
+	
+	@Test
+	public void lowwerCaseScoreJustLetters() {
+		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
+		avaliadorSegurancaSenha.inicializa("abcdefgh", RegraLowerCase.class);
+		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
+		
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -98,7 +118,16 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123456AA", RegraNumbers.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 24, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 24, avaliadorSegurancaSenha.getPontuacao());
+	}
+	
+	@Test
+	public void numbersScoreJustNumbers() {
+		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
+		avaliadorSegurancaSenha.inicializa("12345678", RegraNumbers.class);
+		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
+		
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -107,7 +136,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123456;/", RegraSymbols.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 12, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 12, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -116,7 +145,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("1aa6aa;/", RegraMiddleNumberOrSymbol.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 4, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 4, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -125,7 +154,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("1aa2364aa", RegraRepeatCharacters.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -3, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -3, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -134,7 +163,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("12AAaa*%", RegraRepeatCharacters.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -3, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -3, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 
@@ -144,7 +173,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("1aa2AA4aa", RegraConsecutiveLowerCase.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -4, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -4, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -153,7 +182,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("1AA2aa4AA", RegraConsecutiveUpperCase.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -4, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -4, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -162,7 +191,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("11AAaa43A", RegraConsecutiveNumber.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -4, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -4, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	
@@ -172,7 +201,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("abcdefg", RegraLettersOnly.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -7, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -7, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -181,7 +210,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("11AAaa43A", RegraLettersOnly.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 0, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -190,7 +219,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("12345678", RegraNumbersOnly.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -8, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -8, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -199,7 +228,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("11AAaa43A", RegraNumbersOnly.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", 0, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 0, avaliadorSegurancaSenha.getPontuacao());
 	}
 
 	@Test
@@ -208,7 +237,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123abc4d", RegraSequentialLetters.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -3, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -3, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -217,7 +246,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123cBa4d", RegraSequentialLetters.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -3, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -3, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -226,7 +255,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123abcd", RegraSequentialLetters.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -6, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -6, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -235,7 +264,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123abc4d", RegraSequentialNumbers.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -3, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -3, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -244,7 +273,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("321abc4d", RegraSequentialNumbers.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -3, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -3, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -253,7 +282,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("1234bcd", RegraSequentialNumbers.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -6, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -6, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -262,7 +291,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123&*(4d", RegraSequentialSymbols.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -3, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -3, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
@@ -271,7 +300,7 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("123(*&4d", RegraSequentialSymbols.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -3, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -3, avaliadorSegurancaSenha.getPontuacao());
 	}
 
 	@Test
@@ -280,21 +309,28 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.inicializa("1^&*(cd", RegraSequentialSymbols.class);
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha();
 		
-		Assert.assertEquals("Score", -6, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", -6, avaliadorSegurancaSenha.getPontuacao());
 	}
 	@Test
 	public void scoreWithAllRolesActivated() {
 		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha("12AAaa*%");
-		Assert.assertEquals("Score", 81, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 81, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
 	@Test
 	public void scoreUsingMaximumSimultaneousRules() {
 		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha("123EA^&*cdE");
-		Assert.assertEquals("Score", 100, avaliadorSegurancaSenha.getPontuacao());
+		Assert.assertSame("Score", 100, avaliadorSegurancaSenha.getPontuacao());
 	}
 	
-	 
+	@Test
+	public void retorno() {
+		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
+		avaliadorSegurancaSenha.calculaSegurancaDaSenha("123EA^&*cdE");
+		Response resultadoAvaliacao = avaliadorSegurancaSenha.getResultadoAvaliacao();
+		Assert.assertSame("Score", 100, resultadoAvaliacao.getPontuacao());
+		Assert.assertEquals("Complexidade", "Muito Forte", resultadoAvaliacao.getComplexidade());
+	}
 }

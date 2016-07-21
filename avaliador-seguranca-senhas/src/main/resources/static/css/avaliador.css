@@ -21,7 +21,6 @@ body {
 
 h1 {
 	width: 750px;
-	background: url(images/h1-bg.jpg);
 	color: #9E9E9E;
 	letter-spacing: 1px;
 	font-size: 16px;
@@ -52,6 +51,7 @@ form {
 	color: white;
 	font-weight: bold;
 	font-family: cursive;
+	text-align: center;
 	
 }
 #barraDePontuacao, #barraDeComplexidade{
@@ -74,7 +74,7 @@ form {
 
 input {
 	width: 300px;
-	height: 16px;
+	height: 14px;
 	background: white;
 	border-radius: 5px;
 	-moz-border-radius: 5px;

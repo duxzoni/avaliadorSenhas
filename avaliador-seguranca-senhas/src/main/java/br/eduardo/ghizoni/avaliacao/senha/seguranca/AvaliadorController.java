@@ -17,9 +17,4 @@ public class AvaliadorController {
         return avaliadorSegurancaSenha.getResultadoAvaliacao();
     }
     
-    
-//    @RequestMapping(name = "/")
-//    public String index(){
-//    	return "avaliador";
-//    }
 }

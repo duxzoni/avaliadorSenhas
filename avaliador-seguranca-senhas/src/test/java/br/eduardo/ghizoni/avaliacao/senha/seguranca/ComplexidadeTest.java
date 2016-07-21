@@ -40,7 +40,7 @@ public class ComplexidadeTest {
 		Complexidade porPontuacao = Complexidade.porPontuacao(40);
 		Assert.assertEquals("Complexidade", "Boa", porPontuacao.getMensagem());
 		
-		porPontuacao = Complexidade.porPontuacao(60);
+		porPontuacao = Complexidade.porPontuacao(59);
 		Assert.assertEquals("Complexidade", "Boa", porPontuacao.getMensagem());
 		
 		porPontuacao = Complexidade.porPontuacao(50);
@@ -52,7 +52,7 @@ public class ComplexidadeTest {
 		Complexidade porPontuacao = Complexidade.porPontuacao(61);
 		Assert.assertEquals("Complexidade", "Forte", porPontuacao.getMensagem());
 		
-		porPontuacao = Complexidade.porPontuacao(80);
+		porPontuacao = Complexidade.porPontuacao(79);
 		Assert.assertEquals("Complexidade", "Forte", porPontuacao.getMensagem());
 		
 		porPontuacao = Complexidade.porPontuacao(70);

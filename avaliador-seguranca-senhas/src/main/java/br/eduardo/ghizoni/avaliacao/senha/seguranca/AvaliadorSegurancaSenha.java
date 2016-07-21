@@ -143,14 +143,15 @@ public class AvaliadorSegurancaSenha {
 		return count >3 ? count * MULTIPLICADOR_REQUERIMENTOS : 0;
 	}
 
-	private String getComplexidade() {
-		return Complexidade.porPontuacao(getPontuacao()).getMensagem();
+	private Complexidade getComplexidade() {
+		return Complexidade.porPontuacao(getPontuacao());
 	}
 
 	public Response getResultadoAvaliacao() {
 		Response retorno = new Response();
 		retorno.setPontuacao(getPontuacao());
-		retorno.setComplexidade(getComplexidade());
+		retorno.setComplexidade(getComplexidade().getMensagem());
+		retorno.setCor(getComplexidade().getCor());
 		return retorno;
 	}
 

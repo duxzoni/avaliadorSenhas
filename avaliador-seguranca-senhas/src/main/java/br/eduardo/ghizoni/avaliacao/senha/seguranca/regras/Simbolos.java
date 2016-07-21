@@ -4,7 +4,8 @@ public class Simbolos extends RegraPorCaractere {
 
 	@Override
 	public void validaCharacter(int index) {
-		if (!Character.isLetterOrDigit(senha.charAt(index)))
+		char charAt = senha.charAt(index);
+		if (!Character.isLetterOrDigit(charAt) || charAt == CEDILHA_MINUSCULO || charAt == CEDILHA_MAIUSCULO  )
 			pontuacao++;
 	}
 

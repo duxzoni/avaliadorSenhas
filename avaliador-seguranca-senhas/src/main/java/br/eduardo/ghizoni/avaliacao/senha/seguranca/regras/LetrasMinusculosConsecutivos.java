@@ -6,8 +6,9 @@ public class LetrasMinusculosConsecutivos extends RegraPorCaractere {
 	
 	@Override
 	public void validaCharacter(int index) {
-		boolean isLowerCase = Character.isLowerCase(senha.charAt(index));
-		if(lastCharIsLowerCase && isLowerCase )
+		char charAt = senha.charAt(index);
+		boolean isLowerCase = charAt != CEDILHA_MINUSCULO && Character.isLowerCase(charAt);
+		if( lastCharIsLowerCase && isLowerCase )
 			pontuacao++;
 		
 		lastCharIsLowerCase = isLowerCase;

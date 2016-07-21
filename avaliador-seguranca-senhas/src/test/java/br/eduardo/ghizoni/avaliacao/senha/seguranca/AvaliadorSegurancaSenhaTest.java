@@ -348,4 +348,22 @@ public class AvaliadorSegurancaSenhaTest {
 		Assert.assertSame("Score", 100, resultadoAvaliacao.getPontuacao());
 		Assert.assertEquals("Complexidade", "Muito forte", resultadoAvaliacao.getComplexidade());
 	}
+	
+	@Test
+	public void senhaComCCedilhaMinusculo() {
+		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
+		avaliadorSegurancaSenha.calculaSegurancaDaSenha("çlkjhgf");
+		Response resultadoAvaliacao = avaliadorSegurancaSenha.getResultadoAvaliacao();
+		Assert.assertSame("Score", 20, resultadoAvaliacao.getPontuacao());
+		Assert.assertEquals("Complexidade", "Fraca", resultadoAvaliacao.getComplexidade());
+	}
+	
+	@Test
+	public void senhaComCCedilhaMaiusculo() {
+		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
+		avaliadorSegurancaSenha.calculaSegurancaDaSenha("ÇLKJHGF");
+		Response resultadoAvaliacao = avaliadorSegurancaSenha.getResultadoAvaliacao();
+		Assert.assertSame("Score", 20, resultadoAvaliacao.getPontuacao());
+		Assert.assertEquals("Complexidade", "Fraca", resultadoAvaliacao.getComplexidade());
+	}
 }

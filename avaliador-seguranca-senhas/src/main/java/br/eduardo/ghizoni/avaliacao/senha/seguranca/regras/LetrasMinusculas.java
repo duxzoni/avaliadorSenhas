@@ -1,10 +1,11 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
 public class LetrasMinusculas extends RegraPorCaractere {
-
+	
 	@Override
 	public void validaCharacter(int index) {
-		if (Character.isLowerCase(senha.charAt(index)))
+		char charAt = senha.charAt(index);
+		if (charAt != CEDILHA_MINUSCULO && Character.isLowerCase(charAt))
 			pontuacao++;
 	}
 

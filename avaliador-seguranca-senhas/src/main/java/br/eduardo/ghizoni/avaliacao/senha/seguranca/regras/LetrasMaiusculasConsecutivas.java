@@ -6,8 +6,9 @@ public class LetrasMaiusculasConsecutivas extends RegraPorCaractere {
 	
 	@Override
 	public void validaCharacter(int index) {
-		boolean isUpperCase = Character.isUpperCase(senha.charAt(index));
-		if(lastCharIsUpperCase && isUpperCase )
+		char charAt = senha.charAt(index);
+		boolean isUpperCase = charAt != CEDILHA_MAIUSCULO && Character.isUpperCase(charAt);
+		if( lastCharIsUpperCase && isUpperCase )
 			pontuacao++;
 		
 		lastCharIsUpperCase = isUpperCase;

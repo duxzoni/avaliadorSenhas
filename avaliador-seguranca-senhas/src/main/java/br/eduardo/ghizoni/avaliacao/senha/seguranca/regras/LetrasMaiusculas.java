@@ -4,7 +4,8 @@ public class LetrasMaiusculas extends RegraPorCaractere {
 
 	@Override
 	public void validaCharacter(int index) {
-		if (Character.isUpperCase(senha.charAt(index)))
+		char charAt = senha.charAt(index);
+		if (charAt != CEDILHA_MAIUSCULO && Character.isUpperCase(charAt))
 			pontuacao++;
 	}
 

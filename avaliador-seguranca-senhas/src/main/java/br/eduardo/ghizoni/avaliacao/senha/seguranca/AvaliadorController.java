@@ -1,7 +1,5 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca;
 
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,4 +20,8 @@ public class AvaliadorController {
     }
     
     
+//    @RequestMapping(name = "/")
+//    public String index(){
+//    	return "avaliador";
+//    }
 }

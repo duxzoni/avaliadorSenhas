@@ -331,6 +331,6 @@ public class AvaliadorSegurancaSenhaTest {
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha("123EA^&*cdE");
 		Response resultadoAvaliacao = avaliadorSegurancaSenha.getResultadoAvaliacao();
 		Assert.assertSame("Score", 100, resultadoAvaliacao.getPontuacao());
-		Assert.assertEquals("Complexidade", "Muito Forte", resultadoAvaliacao.getComplexidade());
+		Assert.assertEquals("Complexidade", "Muito forte", resultadoAvaliacao.getComplexidade());
 	}
 }

@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+@font-face {
+	font-family: serif;
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-size: 100%;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #3a3a3a;
+}
+
+.body {
+	width: 800px;
+	margin: 0 auto;
+	display: block;
+}
+
+h1 {
+	width: 498px;
+	height: 64px;
+	background: url(images/h1-bg.jpg);
+	color: #000;
+	font-family: serif;
+	padding: 17px 0px 0px 16px;
+	letter-spacing: 1px;
+	font-size: 2.2em;
+	margin: 0 auto;
+}
+
+form {
+	width: 750px;
+	margin: 0 auto;
+	background-color: #EEEEEE;
+}
+
+#pontuacaoBorda, #complexidadeBorda{
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	height: 20px;
+	margin-bottom: 2px;
+	
+}
+
+#pontuacaoBorda{
+	background: #9E9E9E;
+	width: 50px;
+}
+
+#pontuacao, #complexidade{
+	color: white;
+	font-weight: bold;
+	font-family: cursive;
+	
+}
+#barraDePontuacao, #barraDeComplexidade{
+	background-position: 0 0;
+	position:absolute;
+	z-index: 0;
+}
+
+#barraDePontuacao{
+	width: 50px;
+}
+#complexidadeBorda{
+	background: #9E9E9E;
+	width: 100px;
+}
+
+#barraDeComplexidade{
+	width: 100px;
+}
+
+input {
+	width: 439px;
+	height: 27px;
+	background: white;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #dedede;
+	padding: 10px;
+	margin-left: 50px auto;
+	font-size: 0.9em;
+	color: #3a3a3a;
+}
+
+input:focus, {
+	border: 1px solid #97d6eb;
+}

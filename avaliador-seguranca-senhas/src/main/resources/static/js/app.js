@@ -3,8 +3,8 @@ var app = angular.module('app', ['ngRoute','ngResource']);
 
 app.config(function($routeProvider){
     $routeProvider
-        .when('/',{
-            templateUrl: '/index.html',
+        .when('/avaliador',{
+            templateUrl: '/avaliador.html',
             controller: 'avaliadorController'
         })
         .otherwise(

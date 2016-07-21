@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(name = "avaliador")
+@RequestMapping("avaliador")
 public class AvaliadorController {
 
     @RequestMapping(method = RequestMethod.POST)

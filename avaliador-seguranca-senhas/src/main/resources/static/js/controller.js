@@ -12,7 +12,7 @@ avaliadorControllers.controller('AvaliadorCtrl',
 		        url: '/avaliador',
 		        headers: { 'Content-Type': 'application/json; charset=UTF-8'}
 		    }).success(function(data, status, header, config) {
-		    	$scope.greeting = data;           
+		    	$scope.resultado = data;           
 		    }).error(function(data, status, header, config){
 		        console.log(data);
 		    })

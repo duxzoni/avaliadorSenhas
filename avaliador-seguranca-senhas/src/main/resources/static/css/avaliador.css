@@ -17,6 +17,8 @@ body {
 	margin: 0 auto;
 	display: block;
 	font-family: cursive;
+	border: 1px solid #C3C4C2;
+	border-radius: 5px;
 }
 
 h1 {
@@ -25,12 +27,26 @@ h1 {
 	letter-spacing: 1px;
 	font-size: 16px;
 	margin: 0 auto;
+	margin-top: 15px;
+	
 }
 
-form {
+#campos {
 	width: 750px;
+	height: 100px;
 	margin: 0 auto;
 	background-color: #EEEEEE;
+	border: 1px solid #C3C4C2;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+
+#senha {
+	margin-top: 20px;
+}
+#senha, #pontuacaoBorda{
+	margin-left: 8%;
 }
 
 #pontuacaoBorda, #complexidadeBorda{
@@ -39,7 +55,9 @@ form {
 	-webkit-border-radius: 4px;
 	height: 20px;
 	margin-bottom: 2px;
-	
+	position: relative;
+	float:left;
+	margin-top: 5px;
 }
 
 #pontuacaoBorda{
@@ -52,12 +70,11 @@ form {
 	font-weight: bold;
 	font-family: cursive;
 	text-align: center;
+	margin-left: 1%
 	
 }
 #barraDePontuacao, #barraDeComplexidade{
 	background-position: 0 0;
-	position:absolute;
-	z-index: 0;
 }
 
 #barraDePontuacao{
@@ -66,6 +83,7 @@ form {
 #complexidadeBorda{
 	background: #9E9E9E;
 	width: 100px;
+	margin-left: 1%
 }
 
 #barraDeComplexidade{
@@ -81,10 +99,12 @@ input {
 	-webkit-border-radius: 5px;
 	border: 1px solid #dedede;
 	padding: 10px;
-	margin-left: 50px auto;
 	font-size: 0.9em;
 	color: #3a3a3a;
+	position: relative;
 }
+
+
 
 input:focus, {
 	border: 1px solid #97d6eb;

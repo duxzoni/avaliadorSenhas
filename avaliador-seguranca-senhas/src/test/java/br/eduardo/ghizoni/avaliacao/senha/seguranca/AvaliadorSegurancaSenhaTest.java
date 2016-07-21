@@ -368,6 +368,15 @@ public class AvaliadorSegurancaSenhaTest {
 	}
 	
 	@Test
+	public void senhaComCCedilhaNoMeio() {
+		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
+		avaliadorSegurancaSenha.calculaSegurancaDaSenha("WYÇçXZ");
+		Response resultadoAvaliacao = avaliadorSegurancaSenha.getResultadoAvaliacao();
+		Assert.assertSame("Score", 40, resultadoAvaliacao.getPontuacao());
+		Assert.assertEquals("Complexidade", "Boa", resultadoAvaliacao.getComplexidade());
+	}
+	
+	@Test
 	public void senhaComSimbolosENumerosEmSequencia() {
 		AvaliadorSegurancaSenha avaliadorSegurancaSenha = new AvaliadorSegurancaSenha();
 		avaliadorSegurancaSenha.calculaSegurancaDaSenha("!@#$%67890");

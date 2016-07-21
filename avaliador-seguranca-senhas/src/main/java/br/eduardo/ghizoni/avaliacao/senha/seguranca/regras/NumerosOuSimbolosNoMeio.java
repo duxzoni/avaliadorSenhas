@@ -4,7 +4,9 @@ public class NumerosOuSimbolosNoMeio extends RegraPorCaractere {
 
 	@Override
 	public void validaCharacter(int index) {
-		if (index > 0 && index < (senha.length() - 1) && !Character.isLetter(senha.charAt(index)))
+		char charAt = senha.charAt(index);
+		boolean isCedilha = charAt == CEDILHA_MAIUSCULO || charAt == CEDILHA_MINUSCULO;
+		if (index > 0 && index < (senha.length() - 1) && (!Character.isLetter(charAt) || isCedilha))
 			pontuacao++;
 	}
 

@@ -6,14 +6,11 @@ import org.junit.Test;
 public class ComplexidadeTest {
 
 	@Test
-	public void muitoCurta() {
-		Complexidade porPontuacao = Complexidade.porPontuacao(0);
-		Assert.assertEquals("Complexidade", "Muito curta", porPontuacao.getMensagem());
-	}
-	
-	@Test
 	public void muitoFraca() {
-		Complexidade porPontuacao = Complexidade.porPontuacao(1);
+		Complexidade porPontuacao = Complexidade.porPontuacao(0);
+		Assert.assertEquals("Complexidade", "Muito fraca", porPontuacao.getMensagem());
+
+		porPontuacao = Complexidade.porPontuacao(1);
 		Assert.assertEquals("Complexidade", "Muito fraca", porPontuacao.getMensagem());
 		
 		porPontuacao = Complexidade.porPontuacao(19);

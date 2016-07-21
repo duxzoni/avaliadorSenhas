@@ -1,8 +1,8 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca;
 
 public enum Complexidade {
-	MUITO_CURTA(0,0, "Muito curta"),
-	MUITO_FRACA(1, 19, "Muito fraca"), 
+	MUITO_CURTA(-1,-1, "Muito curta"),
+	MUITO_FRACA(0, 19, "Muito fraca"), 
 	FRACA(20, 39, "Fraca"), 
 	BOA(40, 59, "Boa"),
 	FORTE(60, 79, "Forte"), 

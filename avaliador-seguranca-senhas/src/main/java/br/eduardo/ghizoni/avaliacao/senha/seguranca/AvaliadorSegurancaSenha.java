@@ -25,11 +25,13 @@ import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.SimbolosEmSequencia;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class AvaliadorSegurancaSenha {
 
+	private static final int PONTUACAO_MAXIMA = 100;
+	private static final int PONTUACAO_MINIMA = 0;
 	private static final int MULTIPLICADOR_REQUERIMENTOS = 2;
-	private Integer pontuacao = 0;
+	protected Integer pontuacao = 0;
 	private List<RegraPorCaractere> regrasPorCaractere = new ArrayList<RegraPorCaractere>();
 	private List<RegraPorString> regrasPorString = new ArrayList<RegraPorString>();
-	private List<RegraPorCaractere> requerimentos = new ArrayList<RegraPorCaractere>();
+	private List<Regra> requerimentos = new ArrayList<Regra>();
 	private String senha = "";
 
 	
@@ -37,7 +39,13 @@ public class AvaliadorSegurancaSenha {
 	}
 	
 	public Integer getPontuacao() {
-		return pontuacao > 100 ? 100: pontuacao;
+		if (pontuacao > PONTUACAO_MAXIMA)
+			return PONTUACAO_MAXIMA;
+		
+		if(pontuacao < PONTUACAO_MINIMA)
+			return PONTUACAO_MINIMA;
+		
+		return pontuacao;
 	}
 	
 	protected void inicializa(String senha, Class ... regras) {
@@ -56,7 +64,7 @@ public class AvaliadorSegurancaSenha {
 					regrasPorString.add((RegraPorString) regra);
 				
 				if (requerimentosObrigatorios.contains(classe))
-					requerimentos.add((RegraPorCaractere) regra);
+					requerimentos.add(regra);
 				
 			} catch (InstantiationException e) {
 				e.printStackTrace();
@@ -73,6 +81,7 @@ public class AvaliadorSegurancaSenha {
 		requerimentosObrigatorios.add(LetrasMaiusculas.class);
 		requerimentosObrigatorios.add(Numeros.class);
 		requerimentosObrigatorios.add(Simbolos.class);
+		requerimentosObrigatorios.add(NumeroDeCaracteres.class);
 		
 		return requerimentosObrigatorios;
 		
@@ -132,8 +141,8 @@ public class AvaliadorSegurancaSenha {
 
 	private int pontuacaoRequirements() {
 		int count = 0;
-		if (senha.length() > 0)
-			count++;
+//		if (senha.length() > 0)
+//			count++;
 			
 		for (Regra regra: requerimentos) 
 			if (regra.score() > 0)
@@ -146,7 +155,7 @@ public class AvaliadorSegurancaSenha {
 		Response retorno = new Response();
 		retorno.setPontuacao(getPontuacao());
 		
-		Complexidade complexidade = Complexidade.porPontuacao(getPontuacao());;
+		Complexidade complexidade = senha.length() == 0? Complexidade.MUITO_CURTA : Complexidade.porPontuacao(getPontuacao());;
 		retorno.setComplexidade(complexidade.getMensagem());
 		
 		return retorno;

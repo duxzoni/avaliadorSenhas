@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.Regra;
 import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraConsecutiveLowerCase;
 import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraConsecutiveNumber;
@@ -143,18 +145,14 @@ public class AvaliadorSegurancaSenha {
 		return count >3 ? count * MULTIPLICADOR_REQUERIMENTOS : 0;
 	}
 
-	private Complexidade getComplexidade() {
-		return Complexidade.porPontuacao(getPontuacao());
-	}
-
 	public Response getResultadoAvaliacao() {
 		Response retorno = new Response();
 		retorno.setPontuacao(getPontuacao());
-		retorno.setComplexidade(getComplexidade().getMensagem());
-		retorno.setCor(getComplexidade().getCor());
+		
+		Complexidade complexidade = Complexidade.porPontuacao(getPontuacao());;
+		retorno.setComplexidade(complexidade.getMensagem());
+		
 		return retorno;
 	}
-
-
 
 }

@@ -1,6 +1,6 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraSymbols extends RegraPorCharacter {
+public class Simbolos extends RegraPorCaractere {
 
 	@Override
 	public void validaCharacter(int index) {

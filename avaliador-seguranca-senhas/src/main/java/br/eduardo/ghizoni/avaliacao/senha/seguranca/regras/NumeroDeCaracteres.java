@@ -1,6 +1,6 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraNumberOfCharacters extends RegraPorString{
+public class NumeroDeCaracteres extends RegraPorString{
 
 	private static final int MULTIPLICADOR_LENGTH = 4;
 

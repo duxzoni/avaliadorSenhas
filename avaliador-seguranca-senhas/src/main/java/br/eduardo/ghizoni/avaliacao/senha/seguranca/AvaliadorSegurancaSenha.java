@@ -1,38 +1,35 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.CaracteresRepetidos;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.LetrasApenas;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.LetrasEmSequencia;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.LetrasMaiusculas;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.LetrasMaiusculasConsecutivas;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.LetrasMinusculas;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.LetrasMinusculosConsecutivos;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.NumeroDeCaracteres;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.Numeros;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.NumerosApenas;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.NumerosConsecutivos;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.NumerosEmSequencia;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.NumerosOuSimbolosNoMeio;
 import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.Regra;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraConsecutiveLowerCase;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraConsecutiveNumber;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraConsecutiveUpperCase;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraLettersOnly;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraLowerCase;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraMiddleNumberOrSymbol;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraNumberOfCharacters;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraNumbers;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraNumbersOnly;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraPorCharacter;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraPorCaractere;
 import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraPorString;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraRepeatCharacters;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraSequentialLetters;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraSequentialNumbers;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraSequentialSymbols;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraSymbols;
-import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.RegraUpperCase;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.Simbolos;
+import br.eduardo.ghizoni.avaliacao.senha.seguranca.regras.SimbolosEmSequencia;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class AvaliadorSegurancaSenha {
 
 	private static final int MULTIPLICADOR_REQUERIMENTOS = 2;
 	private Integer pontuacao = 0;
-	private List<RegraPorCharacter> regrasPorCharacter = new ArrayList<RegraPorCharacter>();
+	private List<RegraPorCaractere> regrasPorCaractere = new ArrayList<RegraPorCaractere>();
 	private List<RegraPorString> regrasPorString = new ArrayList<RegraPorString>();
-	private List<RegraPorCharacter> requerimentos = new ArrayList<RegraPorCharacter>();
+	private List<RegraPorCaractere> requerimentos = new ArrayList<RegraPorCaractere>();
 	private String senha = "";
 
 	
@@ -53,13 +50,13 @@ public class AvaliadorSegurancaSenha {
 				regra = classe.newInstance();
 				regra.setSenha(senha);
 				
-				if(regra instanceof RegraPorCharacter)
-					regrasPorCharacter.add((RegraPorCharacter) regra);
+				if(regra instanceof RegraPorCaractere)
+					regrasPorCaractere.add((RegraPorCaractere) regra);
 				else
 					regrasPorString.add((RegraPorString) regra);
 				
 				if (requerimentosObrigatorios.contains(classe))
-					requerimentos.add((RegraPorCharacter) regra);
+					requerimentos.add((RegraPorCaractere) regra);
 				
 			} catch (InstantiationException e) {
 				e.printStackTrace();
@@ -72,10 +69,10 @@ public class AvaliadorSegurancaSenha {
 	
 	private List<Class> requerimentosObrigatorios(){
 		ArrayList<Class> requerimentosObrigatorios = new ArrayList<Class>();
-		requerimentosObrigatorios.add(RegraLowerCase.class);
-		requerimentosObrigatorios.add(RegraUpperCase.class);
-		requerimentosObrigatorios.add(RegraNumbers.class);
-		requerimentosObrigatorios.add(RegraSymbols.class);
+		requerimentosObrigatorios.add(LetrasMinusculas.class);
+		requerimentosObrigatorios.add(LetrasMaiusculas.class);
+		requerimentosObrigatorios.add(Numeros.class);
+		requerimentosObrigatorios.add(Simbolos.class);
 		
 		return requerimentosObrigatorios;
 		
@@ -90,26 +87,26 @@ public class AvaliadorSegurancaSenha {
 
 	public void inicializaTodasAsRegrasPorChar(String senha) {
 		inicializa(senha, 
-				RegraLowerCase.class, 
-				RegraUpperCase.class, 
-				RegraNumbers.class, 
-				RegraSymbols.class, 
-				RegraMiddleNumberOrSymbol.class,
-				RegraRepeatCharacters.class, 
-				RegraConsecutiveLowerCase.class, 
-				RegraConsecutiveUpperCase.class, 
-				RegraConsecutiveNumber.class
+				LetrasMinusculas.class, 
+				LetrasMaiusculas.class, 
+				Numeros.class, 
+				Simbolos.class, 
+				NumerosOuSimbolosNoMeio.class,
+				CaracteresRepetidos.class, 
+				LetrasMinusculosConsecutivos.class, 
+				LetrasMaiusculasConsecutivas.class, 
+				NumerosConsecutivos.class
 				);
 	}
 	
 	public void inicializaTodasAsRegrasPorString(String senha) {
 		inicializa(senha, 
-				RegraLettersOnly.class, 
-				RegraNumbersOnly.class, 
-				RegraNumberOfCharacters.class, 
-				RegraSequentialLetters.class,
-				RegraSequentialNumbers.class,
-				RegraSequentialSymbols.class
+				LetrasApenas.class, 
+				NumerosApenas.class, 
+				NumeroDeCaracteres.class, 
+				LetrasEmSequencia.class,
+				NumerosEmSequencia.class,
+				SimbolosEmSequencia.class
 				);
 	}
 	
@@ -117,10 +114,10 @@ public class AvaliadorSegurancaSenha {
 	public void calculaSegurancaDaSenha() {
 
 		for (int index = 0; index < senha.length();  index++)
-			for (RegraPorCharacter regraPorCharacter : regrasPorCharacter) 
+			for (RegraPorCaractere regraPorCharacter : regrasPorCaractere) 
 				regraPorCharacter.validaCharacter(index);
 		
-		for (Regra regraPorCharacter : regrasPorCharacter) 
+		for (Regra regraPorCharacter : regrasPorCaractere) 
 			pontuacao += regraPorCharacter.score();
 
 		for (RegraPorString regraPorString : regrasPorString) {

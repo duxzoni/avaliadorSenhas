@@ -1,10 +1,10 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraSequentialLetters extends RegraSequential {
+public class NumerosEmSequencia extends RegraSequencia {
 
 	@Override
 	protected String getSequence() {
-		return "abcdefghijklmnopqrstuvwxyz";
+		return "0123456789";
 	}
 
 }

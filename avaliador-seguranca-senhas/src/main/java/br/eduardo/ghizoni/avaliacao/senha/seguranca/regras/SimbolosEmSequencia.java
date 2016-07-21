@@ -1,6 +1,6 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraSequentialSymbols extends RegraSequential {
+public class SimbolosEmSequencia extends RegraSequencia {
 
 	@Override
 	protected String getSequence() {

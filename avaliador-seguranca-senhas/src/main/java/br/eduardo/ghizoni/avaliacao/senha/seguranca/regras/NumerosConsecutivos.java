@@ -1,6 +1,6 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraConsecutiveNumber extends RegraPorCharacter {
+public class NumerosConsecutivos extends RegraPorCaractere {
 	
 	private boolean lastCharIsDigit = false;
 	

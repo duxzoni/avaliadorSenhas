@@ -1,10 +1,10 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraLowerCase extends RegraPorCharacter {
+public class LetrasMaiusculas extends RegraPorCaractere {
 
 	@Override
 	public void validaCharacter(int index) {
-		if (Character.isLowerCase(senha.charAt(index)))
+		if (Character.isUpperCase(senha.charAt(index)))
 			pontuacao++;
 	}
 

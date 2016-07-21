@@ -1,6 +1,6 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraRepeatCharacters extends RegraPorCharacter {
+public class CaracteresRepetidos extends RegraPorCaractere {
 
 	private double charRepetidos = 0; 
 	

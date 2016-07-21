@@ -1,6 +1,6 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraMiddleNumberOrSymbol extends RegraPorCharacter {
+public class NumerosOuSimbolosNoMeio extends RegraPorCaractere {
 
 	@Override
 	public void validaCharacter(int index) {

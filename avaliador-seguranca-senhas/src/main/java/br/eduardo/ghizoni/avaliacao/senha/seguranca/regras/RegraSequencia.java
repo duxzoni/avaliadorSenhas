@@ -1,6 +1,6 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public abstract class RegraSequential extends RegraPorString{
+public abstract class RegraSequencia extends RegraPorString{
 
 	@Override
 	public void validaSenha() {

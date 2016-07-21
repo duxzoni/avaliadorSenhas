@@ -1,6 +1,6 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraConsecutiveUpperCase extends RegraPorCharacter {
+public class LetrasMaiusculasConsecutivas extends RegraPorCaractere {
 	
 	private boolean lastCharIsUpperCase = false;
 	

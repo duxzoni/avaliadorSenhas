@@ -12,7 +12,7 @@
 <script src="js/controller.js"></script>
 <title>Avaliador de Segurança de Senhas</title>
 </head>
-<body data-ng-controller="AvaliadorCtrl" ng-onload="loadValues()">
+<body data-ng-controller="AvaliadorCtrl" data-ng-onload="loadValues()">
 	<section class="body">
 		<header class="nome">
 			<h1>AVALIADOR DE SEGURANÇA DE SENHA</h1>
@@ -20,7 +20,7 @@
 		<div id="campos">
 			<div id="senha">
 				<input type="password" id="senhaPwd" name="senhaPwd"
-					autocomplete="off" ng-keyup="loadValues()" placeholder="Senha" />
+					autocomplete="off" data-ng-keyup="loadValues()" placeholder="Senha" />
 			</div>
 			<div id="pontuacaoBorda">
 				<div id="pontuacao">{{resultado.pontuacao}}%</div>

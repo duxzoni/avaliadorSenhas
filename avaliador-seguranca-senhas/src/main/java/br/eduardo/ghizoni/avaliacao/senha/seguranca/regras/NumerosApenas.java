@@ -1,6 +1,6 @@
 package br.eduardo.ghizoni.avaliacao.senha.seguranca.regras;
 
-public class RegraNumbersOnly extends RegraPorString{
+public class NumerosApenas extends RegraPorString{
 
 	@Override
 	public void validaSenha() {
